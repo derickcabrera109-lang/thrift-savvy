@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thrift Savvy — Your One Stop Budget Friendly Thrift Finds</title>
+<meta name="description" content="Thrift Savvy — vintage & branded thrift finds on a budget. Browse the drop, inquire on WhatsApp, meet-up or delivery. Dubai, UAE.">
+<link rel="icon" type="image/png" href="https://base44.app/api/apps/6a562da51251e76c7e1f3827/files/mp/public/6a562da51251e76c7e1f3827/5f5820d4d_thrift-savvy-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THRIFT SAVVY — Inquiry website (no cart / no checkout)
+   Built by RED DEV
+   ============================================================
+   CONFIG — edit before handover:
+   - WHATSAPP  : client's WhatsApp number (currently demo number)
+   - EMAIL     : client's email
+   - FACEBOOK  : https://www.facebook.com/tobii.lass (real page)
+   - INSTAGRAM : set when client provides handle
+   - MEETUP    : meet-up point(s)
+   ============================================================ */
+:root{
+  --cream:#F6EFE1;
+  --cream-2:#EFE5D2;
+  --ink:#211C15;
+  --ink-2:#2E2720;
+  --orange:#E85A1F;
+  --orange-dark:#C74812;
+  --mustard:#F6B91B;
+  --teal:#007D6F;
+  --pink:#E8317A;
+  --paper:#FFF9EC;
+  --border:rgba(33,28,21,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+/* copy protection */
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none}
+input,textarea,select{-webkit-user-select:text;user-select:text}
+img{-webkit-touch-callout:none}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit}
+.display{font-family:'Archivo Black',sans-serif;text-transform:uppercase;line-height:.95;letter-spacing:.01em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:100;background:rgba(246,239,225,.92);backdrop-filter:blur(10px);border-bottom:2px solid var(--ink)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:38px;height:38px;background:var(--orange);color:#fff;border:2px solid var(--ink);display:grid;place-items:center;font-family:'Archivo Black';font-size:15px;transform:rotate(-6deg);box-shadow:3px 3px 0 var(--ink)}
+.logo-img{height:54px;width:auto;transition:transform .2s;filter:drop-shadow(0 2px 0 rgba(33,28,21,.25))}
+.logo:hover .logo-img{transform:rotate(-4deg) scale(1.06)}
+.foot-logo{height:84px;width:auto;margin-bottom:4px}
+.logo-text{font-family:'Archivo Black';font-size:19px;text-transform:uppercase;letter-spacing:.02em}
+.logo-text span{color:var(--orange)}
+.nav-links{display:flex;gap:26px;font-weight:600;font-size:14.5px}
+.nav-links a{position:relative;padding:4px 0}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--orange);transition:width .25s}
+.nav-links a:hover::after{width:100%}
+.inquire-btn{display:flex;align-items:center;gap:9px;background:var(--ink);color:var(--cream);padding:10px 18px;font-weight:700;font-size:14px;border:2px solid var(--ink);transition:transform .15s, background .2s}
+.inquire-btn:hover{background:var(--orange);transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* ---------- TICKER ---------- */
+.ticker{background:var(--ink);color:var(--cream);overflow:hidden;border-bottom:2px solid var(--ink);padding:10px 0;white-space:nowrap}
+.ticker-track{display:inline-flex;gap:0;animation:tick 22s linear infinite;will-change:transform}
+.ticker span{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:0 28px;display:inline-flex;align-items:center;gap:28px}
+.ticker span::after{content:'★';color:var(--orange)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+
+/* ---------- BANNER ---------- */
+.banner-strip{background:var(--ink);border-bottom:2px solid var(--ink)}
+.banner-strip img{width:100%;max-width:1400px;margin:0 auto;height:auto;aspect-ratio:1024/403;object-fit:cover}
+@media(max-width:560px){.banner-strip img{aspect-ratio:1024/403}}
+
+/* ---------- HERO ---------- */
+header{position:relative;background:radial-gradient(1200px 500px at 80% -10%, rgba(232,90,31,.22), transparent 60%), var(--cream);padding:72px 0 96px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.sticker{display:inline-block;background:var(--mustard);border:2px solid var(--ink);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;padding:8px 16px;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--ink);margin-bottom:22px}
+.hero-title{font-size:clamp(44px,7vw,84px);margin-bottom:22px}
+.hero-title em{font-style:normal;color:var(--orange)}
+.hero-title .stroke{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.hero-copy{font-size:17px;line-height:1.65;max-width:480px;margin-bottom:30px;color:var(--ink-2)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;padding:15px 26px;border:2px solid var(--ink);transition:transform .15s, box-shadow .15s, background .2s}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn-ghost{background:transparent;box-shadow:4px 4px 0 var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--cream);transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(33,28,21,.35)}
+.hero-stats{display:flex;gap:34px;flex-wrap:wrap}
+.stat .n{font-family:'Archivo Black';font-size:26px;color:var(--orange)}
+.stat .l{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;opacity:.75}
+.hero-img-wrap{position:relative}
+.hero-img{border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);transform:rotate(1.5deg);width:100%;aspect-ratio:4/4.4;object-fit:cover}
+.hero-badge{position:absolute;left:-22px;bottom:34px;background:var(--teal);color:#fff;border:2px solid var(--ink);padding:14px 18px;transform:rotate(-4deg);box-shadow:4px 4px 0 var(--ink);max-width:230px}
+.hero-badge .b1{font-family:'Archivo Black';font-size:15px;text-transform:uppercase}
+.hero-badge .b2{font-size:12.5px;margin-top:4px;opacity:.9;line-height:1.4}
+.hero-price-tag{position:absolute;right:-14px;top:-20px;background:var(--mustard);border:2px solid var(--ink);font-family:'Archivo Black';font-size:13px;padding:10px 14px;transform:rotate(6deg);box-shadow:3px 3px 0 var(--ink)}
+@media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px}header{padding:52px 0 72px}.hero-img-wrap{max-width:520px}}
+
+/* ---------- SECTION SHELL ---------- */
+section{padding:86px 0}
+.sec-head{margin-bottom:44px}
+.sec-kicker{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.sec-kicker::before{content:'';width:26px;height:2px;background:var(--orange)}
+.sec-title{font-size:clamp(30px,4.4vw,48px)}
+.dark{background:var(--ink);color:var(--cream)}
+.dark .sec-kicker{color:var(--mustard)}
+.dark .sec-kicker::before{background:var(--mustard)}
+
+/* ---------- WHY ---------- */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.why-card{background:var(--paper);border:2px solid var(--ink);padding:30px 26px;box-shadow:5px 5px 0 var(--ink);transition:transform .2s, box-shadow .2s}
+.why-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink)}
+.why-num{font-family:'Archivo Black';font-size:14px;background:var(--orange);color:#fff;width:34px;height:34px;display:grid;place-items:center;border:2px solid var(--ink);transform:rotate(-5deg);margin-bottom:18px}
+.why-card h3{font-family:'Archivo Black';text-transform:uppercase;font-size:17px;margin-bottom:10px}
+.why-card p{font-size:14.5px;line-height:1.6;opacity:.85}
+@media(max-width:820px){.why-grid{grid-template-columns:1fr}}
+
+/* ---------- SHOP ---------- */
+.shop-bar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.chip{border:2px solid var(--ink);background:var(--paper);padding:9px 18px;font-weight:600;font-size:13.5px;transition:all .15s}
+.chip:hover{background:var(--cream-2)}
+.chip.active{background:var(--ink);color:var(--cream);box-shadow:3px 3px 0 var(--orange)}
+.shop-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:30px}
+.search-box{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;border:2px solid var(--ink);background:var(--paper);padding:0 16px;height:46px}
+.search-box input{border:none;outline:none;background:none;font-size:14.5px;width:100%}
+.sort-select{border:2px solid var(--ink);background:var(--paper);height:46px;padding:0 14px;font-size:14px;font-weight:600;outline:none;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media(max-width:920px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.card{background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transition:transform .18s, box-shadow .18s;display:flex;flex-direction:column}
+.card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink)}
+.card-img-wrap{position:relative;overflow:hidden;border-bottom:2px solid var(--ink);background:var(--cream-2)}
+.card-img{aspect-ratio:1/1;object-fit:cover;width:100%;transition:transform .4s}
+.card:hover .card-img{transform:scale(1.05)}
+.oo1{position:absolute;top:12px;left:12px;background:var(--orange);color:#fff;font-family:'Archivo Black';font-size:11px;letter-spacing:.08em;padding:6px 10px;border:2px solid var(--ink);transform:rotate(-4deg)}
+.cond{position:absolute;top:12px;right:12px;background:var(--ink);color:var(--cream);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border:2px solid var(--ink)}
+.card-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card-brand{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+.card-name{font-family:'Archivo Black';text-transform:uppercase;font-size:16.5px;line-height:1.15}
+.card-meta{font-size:12.5px;opacity:.7;font-weight:500}
+.card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;gap:10px}
+.price{font-family:'Archivo Black';font-size:20px}
+.price small{font-size:12px;font-weight:600;opacity:.6;font-family:'Space Grotesk'}
+.inquire-item-btn{background:var(--orange);color:#fff;font-weight:700;font-size:13px;padding:10px 16px;border:2px solid var(--ink);transition:all .15s;white-space:nowrap}
+.inquire-item-btn:hover{background:var(--ink);color:var(--cream)}
+.empty-msg{grid-column:1/-1;text-align:center;padding:60px 20px;font-weight:600;font-size:16px;border:2px dashed var(--border);color:rgba(33,28,21,.55)}
+.shop-note{margin-top:26px;background:var(--paper);border:2px solid var(--ink);padding:16px 20px;font-size:13.5px;font-weight:600;display:flex;gap:12px;align-items:center;box-shadow:4px 4px 0 var(--mustard)}
+.shop-note .dot{width:10px;height:10px;background:var(--orange);border-radius:50%;flex:none;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ---------- HOW IT WORKS ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.step{border:2px solid rgba(246,239,225,.25);padding:28px 24px;position:relative;background:rgba(246,239,225,.04)}
+.step-num{font-family:'Archivo Black';font-size:44px;color:transparent;-webkit-text-stroke:1.5px var(--mustard);line-height:1;margin-bottom:14px}
+.step h3{font-family:'Archivo Black';font-size:15px;text-transform:uppercase;margin-bottom:10px;letter-spacing:.03em}
+.step p{font-size:14px;line-height:1.6;opacity:.75}
+@media(max-width:920px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* ---------- DROPS / SOCIAL ---------- */
+.drop-banner{display:grid;grid-template-columns:1.2fr .8fr;gap:0;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);overflow:hidden}
+.drop-left{background:var(--orange);color:#fff;padding:52px 44px}
+.drop-left h2{font-family:'Archivo Black';text-transform:uppercase;font-size:clamp(26px,3.6vw,40px);line-height:1.05;margin-bottom:16px}
+.drop-left p{font-size:15.5px;line-height:1.6;opacity:.92;max-width:420px;margin-bottom:26px}
+.drop-right{background:var(--ink);color:var(--cream);padding:52px 44px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.social-link{display:flex;align-items:center;gap:14px;border:2px solid rgba(246,239,225,.3);padding:15px 18px;font-weight:600;transition:all .15s;font-size:15px}
+.social-link:hover{background:var(--orange);border-color:var(--orange);transform:translate(-2px,-2px)}
+.social-link svg{width:20px;height:20px;flex:none}
+@media(max-width:820px){.drop-banner{grid-template-columns:1fr}.drop-left,.drop-right{padding:36px 28px}}
+
+/* ---------- TESTIMONIALS ---------- */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.testi{background:var(--paper);border:2px solid var(--ink);padding:28px 24px;box-shadow:5px 5px 0 var(--ink);position:relative}
+.testi::before{content:'“';font-family:'Archivo Black';font-size:52px;color:var(--orange);position:absolute;top:8px;right:18px;line-height:1;opacity:.85}
+.testi p{font-size:14.5px;line-height:1.65;margin-bottom:18px}
+.testi .who{font-weight:700;font-size:13.5px}
+.testi .who span{display:block;font-weight:500;font-size:12px;opacity:.6;margin-top:2px}
+.stars{color:var(--mustard);font-size:14px;letter-spacing:2px;margin-bottom:12px}
+@media(max-width:820px){.testi-grid{grid-template-columns:1fr}}
+
+/* ---------- SIZE GUIDE ---------- */
+.size-tbl{width:100%;border-collapse:collapse;background:var(--paper);border:2px solid var(--ink)}
+.size-tbl th,.size-tbl td{border:1.5px solid var(--ink);padding:12px 14px;font-size:13.5px;text-align:left}
+.size-tbl th{background:var(--ink);color:var(--cream);font-family:'Archivo Black';font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.size-tbl td b{color:var(--orange)}
+.footnote{font-size:12.5px;opacity:.65;margin-top:12px}
+
+/* ---------- INQUIRY FORM ---------- */
+.inquiry-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
+.inquiry-info h3{font-family:'Archivo Black';text-transform:uppercase;font-size:18px;margin-bottom:14px}
+.inquiry-info p{font-size:15px;line-height:1.7;opacity:.8;margin-bottom:22px}
+.contact-row{display:flex;align-items:center;gap:14px;border:2px solid rgba(246,239,225,.28);padding:15px 18px;font-weight:600;font-size:14.5px;transition:all .15s}
+.contact-row:hover{background:var(--orange);border-color:var(--orange)}
+.contact-row svg{width:19px;height:19px;flex:none}
+.inquiry-info .contact-col{display:flex;flex-direction:column;gap:12px}
+.inquiry-form{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--orange);padding:32px 28px}
+.inquiry-form h3{font-family:'Archivo Black';text-transform:uppercase;font-size:18px;margin-bottom:6px}
+.inquiry-form .sub{font-size:13px;opacity:.65;margin-bottom:22px}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.field input,.field select,.field textarea{
+  width:100%;border:2px solid var(--ink);background:var(--cream);padding:13px 15px;
+  font-size:14.5px;outline:none;transition:box-shadow .15s;
+}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{box-shadow:3px 3px 0 var(--mustard)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.err{font-size:12px;color:var(--orange-dark);font-weight:600;margin-top:5px;display:none}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--orange)}
+.field.invalid .err{display:block}
+.form-btn{width:100%;background:var(--orange);color:#fff;font-family:'Archivo Black';font-size:14.5px;text-transform:uppercase;padding:16px;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transition:all .15s;display:flex;align-items:center;justify-content:center;gap:10px}
+.form-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.form-btn svg{width:18px;height:18px}
+.form-note{font-size:11.5px;opacity:.6;text-align:center;margin-top:12px;line-height:1.5}
+@media(max-width:820px){.inquiry-grid{grid-template-columns:1fr}.field-row{grid-template-columns:1fr}}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:var(--cream);border-top:2px solid var(--orange)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;padding:64px 0 44px}
+.foot-brand .logo-text{color:var(--cream)}
+.foot-brand p{font-size:14px;line-height:1.7;opacity:.7;margin-top:16px;max-width:320px}
+.foot-col h4{font-family:'Archivo Black';font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;color:var(--mustard)}
+.foot-col a,.foot-col p{display:block;font-size:14px;opacity:.75;margin-bottom:10px;transition:opacity .15s}
+.foot-col a:hover{opacity:1;color:var(--orange)}
+.foot-bottom{border-top:1px solid rgba(246,239,225,.15);padding:20px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12.5px;opacity:.55}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr;gap:32px}}
+
+/* ---------- FB ACTIVITY FEED ---------- */
+.fb-feed{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.fb-post{background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);display:flex;flex-direction:column;transition:transform .18s, box-shadow .18s}
+.fb-post:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink)}
+.fb-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:2px solid var(--border)}
+.fb-ava{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);object-fit:cover;background:var(--cream-2)}
+.fb-name{font-weight:700;font-size:15px}
+.fb-name small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.fb-date{font-size:12px;opacity:.6;font-weight:500;margin-top:1px}
+.fb-text{padding:16px 18px;font-size:15px;line-height:1.55;flex:1}
+.fb-photo{border-top:2px solid var(--border);border-bottom:2px solid var(--border);aspect-ratio:1/1;object-fit:cover;width:100%;background:var(--cream-2)}
+.fb-comments{padding:14px 18px;display:flex;flex-direction:column;gap:10px;background:var(--cream)}
+.fb-comment{font-size:13px;line-height:1.45;background:var(--paper);border:1.5px solid var(--border);padding:8px 12px}
+.fb-comment b{margin-right:6px}
+.fb-comment.author b{color:var(--orange)}
+.fb-link{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-weight:700;font-size:14px;border-bottom:2px solid var(--orange);padding-bottom:3px}
+.fb-link:hover{color:var(--orange)}
+@media(max-width:920px){.fb-feed{grid-template-columns:1fr}}
+
+/* ---------- TOAST ---------- */
+.toast-wrap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:10px;align-items:center;pointer-events:none}
+.toast{background:var(--ink);color:var(--cream);font-weight:600;font-size:14px;padding:13px 22px;border:2px solid var(--ink);box-shadow:4px 4px 0 rgba(232,90,31,.9);display:flex;align-items:center;gap:10px;animation:toastIn .3s ease}
+.toast .tick{color:var(--mustard);font-weight:900}
+@keyframes toastIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.toast.out{animation:toastOut .3s ease forwards}
+@keyframes toastOut{to{opacity:0;transform:translateY(14px)}}
+</style>
+</head>
+<body id="top">
+
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top" aria-label="Thrift Savvy home">
+      <img class="logo-img" src="https://base44.app/api/apps/6a562da51251e76c7e1f3827/files/mp/public/6a562da51251e76c7e1f3827/5f5820d4d_thrift-savvy-logo.png" alt="Thrift Savvy logo">
+    </a>
+    <div class="nav-links">
+      <a href="#shop">Browse</a>
+      <a href="#why">Why Thrift</a>
+      <a href="#how">How It Works</a>
+      <a href="#feed">From the Page</a>
+      <a href="#size-guide">Size Guide</a>
+      <a href="#inquiry">Inquiries</a>
+    </div>
+    <a href="#inquiry" class="inquire-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      Inquire Now
+    </a>
+  </div>
+</nav>
+
+<!-- ================= TICKER ================= -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ================= BANNER ================= -->
+<div class="banner-strip">
+  <img src="https://base44.app/api/apps/6a562da51251e76c7e1f3827/files/mp/public/6a562da51251e76c7e1f3827/9452c2f41_thrift-savvy-banner.jpg" alt="Thrift Savvy: curated vintage, unique finds, sustainable style. New drops weekly" fetchpriority="high">
+</div>
+
+<!-- ================= HERO ================= -->
+<header>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="sticker">★ Curated vintage. Unique finds. Sustainable style.</div>
+      <h1 class="display hero-title">
+        Vintage <em>&amp;</em><br>
+        <span class="stroke">Branded</span><br>
+        Threads.
+      </h1>
+      <p class="hero-copy">
+        Hand-picked vintage and branded clothing on a budget. Browse what's
+        on the rack, inquire about the pieces you want, and we'll set them
+        aside for you. Every piece is one of one — first to inquire wins.
+      </p>
+      <div class="hero-cta">
+        <a href="#shop" class="btn btn-primary">Browse the rack ↓</a>
+        <a href="#inquiry" class="btn btn-ghost">Send an inquiry</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="n">500+</div><div class="l">Unique pieces</div></div>
+        <div class="stat"><div class="n">731</div><div class="l">Followers</div></div>
+        <div class="stat"><div class="n">From AED 49</div><div class="l">Budget prices</div></div>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="https://media.base44.com/images/public/6a562da51251e76c7e1f3827/63da2b50d_generated_image.png" alt="Inside Thrift Savvy — racks of curated vintage and branded clothing">
+      <div class="hero-price-tag">BUDGET FRIENDLY</div>
+      <div class="hero-badge">
+        <div class="b1">New finds every week</div>
+        <div class="b2">Follow the page so you never miss a drop. First to inquire gets the piece.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= WHY ================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Why thrift savvy</div>
+      <h2 class="display sec-title">Style with a story</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <h3>One of one</h3>
+        <p>No restocks, no reprints. Each piece on the rack is the only one — build a wardrobe nobody else can copy.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <h3>Easy on the wallet</h3>
+        <p>Branded and vintage quality at thrift prices. Looking good shouldn't cost a month's salary.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <h3>Sustainable style</h3>
+        <p>Every pre-loved piece gets a second life instead of a landfill. Look good, spend less, waste less.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHOP ================= -->
+<section id="shop" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">On the rack now</div>
+      <h2 class="display sec-title">Fresh thrift finds</h2>
+    </div>
+
+    <div class="shop-bar" id="catChips">
+      <button class="chip active" data-cat="all">All</button>
+      <button class="chip" data-cat="Tees">Vintage Tees</button>
+      <button class="chip" data-cat="Shirts">Flannels &amp; Shirts</button>
+      <button class="chip" data-cat="Jackets">Jackets</button>
+      <button class="chip" data-cat="Streetwear">Streetwear</button>
+      <button class="chip" data-cat="Dresses">Dresses</button>
+      <button class="chip" data-cat="Footwear">Footwear</button>
+      <button class="chip" data-cat="Caps">Vintage Caps</button>
+      <button class="chip" data-cat="Bags">Bags</button>
+    </div>
+
+    <div class="shop-tools">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="searchInput" type="text" placeholder="Search brand or item…" aria-label="Search products">
+      </div>
+      <select class="sort-select" id="sortSelect" aria-label="Sort products">
+        <option value="default">Sort: Featured</option>
+        <option value="low">Price: Low → High</option>
+        <option value="high">Price: High → Low</option>
+      </select>
+    </div>
+
+    <div class="grid" id="productGrid"></div>
+
+    <div class="shop-note">
+      <div class="dot"></div>
+      <span>This is an inquiry site — tap "Inquire" on any piece and it opens a WhatsApp chat reserved for that item. New finds are posted weekly on the Facebook page.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW ================= -->
+<section id="how" class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">How it works</div>
+      <h2 class="display sec-title">From rack to you in 4 steps</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Browse the finds</h3>
+        <p>New pieces every week on the page and here on the site. Everything is one of one.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Inquire on WhatsApp</h3>
+        <p>Tap Inquire on any piece — or use the form below. We confirm availability, measurements and price.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Meet-up or delivery</h3>
+        <p>Pick up at our meet-up spot in Dubai or have it delivered across the UAE. Try before you buy at meet-ups.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Rock it</h3>
+        <p>Wear it your way. Tag us in your fits and get first pick on the next drop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FB ACTIVITY ================= -->
+<section id="feed" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Straight from the page</div>
+      <h2 class="display sec-title">Latest activity</h2>
+    </div>
+    <div class="fb-feed">
+      <article class="fb-post">
+        <div class="fb-head">
+          <img class="fb-ava" src="https://base44.app/api/apps/6a562da51251e76c7e1f3827/files/mp/public/6a562da51251e76c7e1f3827/5f5820d4d_thrift-savvy-logo.png" alt="Thrift Savvy">
+          <div>
+            <div class="fb-name">Thrift Savvy<small>731 followers · Thrift store</small></div>
+            <div class="fb-date">October 9, 2025</div>
+          </div>
+        </div>
+        <p class="fb-text">Sipat kilatis na tropa, Mura lang 🫡🫡</p>
+        <div class="fb-comments">
+          <div class="fb-comment"><b>Mc Mac Sophy</b> Check inbox bossing, nag pm ako 🤭</div>
+        </div>
+      </article>
+      <article class="fb-post">
+        <div class="fb-head">
+          <img class="fb-ava" src="https://base44.app/api/apps/6a562da51251e76c7e1f3827/files/mp/public/6a562da51251e76c7e1f3827/5f5820d4d_thrift-savvy-logo.png" alt="Thrift Savvy">
+          <div>
+            <div class="fb-name">Thrift Savvy<small>731 followers · Thrift store</small></div>
+            <div class="fb-date">September 30, 2025</div>
+          </div>
+        </div>
+        <p class="fb-text">Snap Kayo jan 😁</p>
+        <div class="fb-comments">
+          <div class="fb-comment"><b>Jake Malcolm</b> Logo7 hm</div>
+          <div class="fb-comment author"><b>Thrift Savvy</b> Jake Malcolm pm</div>
+        </div>
+      </article>
+      <article class="fb-post">
+        <div class="fb-head">
+          <img class="fb-ava" src="https://base44.app/api/apps/6a562da51251e76c7e1f3827/files/mp/public/6a562da51251e76c7e1f3827/5f5820d4d_thrift-savvy-logo.png" alt="Thrift Savvy">
+          <div>
+            <div class="fb-name">Thrift Savvy<small>731 followers · Thrift store</small></div>
+            <div class="fb-date">September 29, 2025</div>
+          </div>
+        </div>
+        <p class="fb-text">Thrift Savvy updated his profile picture.</p>
+        <div class="fb-comments">
+          <div class="fb-comment"><b>Follow the page</b> to catch every drop first 🧢</div>
+        </div>
+      </article>
+    </div>
+    <a class="fb-link" href="https://www.facebook.com/tobii.lass" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
+      See all posts on Facebook
+    </a>
+  </div>
+</section>
+
+<!-- ================= DROPS / SOCIAL ================= -->
+<section id="drops">
+  <div class="wrap">
+    <div class="drop-banner">
+      <div class="drop-left">
+        <h2>Never miss<br>a drop</h2>
+        <p>New finds go fast — the best pieces are usually claimed within hours. Follow the page, turn on notifications, and you'll always be first in line.</p>
+        <a href="https://www.facebook.com/tobii.lass" target="_blank" rel="noopener" class="btn" style="background:#fff;color:var(--ink)">Follow on Facebook</a>
+      </div>
+      <div class="drop-right">
+        <a class="social-link" href="https://www.facebook.com/tobii.lass" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
+          facebook.com/tobii.lass
+        </a>
+        <a class="social-link" href="https://www.instagram.com/thrift.savvy" target="_blank" rel="noopener" aria-label="Thrift Savvy on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @thrift.savvy on Instagram
+        </a>
+        <a class="social-link" href="#inquiry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Send us an inquiry
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Word on the street</div>
+      <h2 class="display sec-title">Savvy shoppers say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>Found an original 90s tee for less than the price of a new fast-fashion one. Quality is unreal and it's actually one of one.</p>
+        <div class="who">Marcus D.<span>Dubai Marina</span></div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>Inquired on WhatsApp, met up the same day, tried it on and took it home. Easiest thrift experience I've had in the UAE.</p>
+        <div class="who">Aisha R.<span>Deira</span></div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>Every drop has something different. I've built half my wardrobe from here — levi's, windbreakers, band tees. Always authentic, always budget friendly.</p>
+        <div class="who">Jonas K.<span>Al Rigga</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SIZE GUIDE ================= -->
+<section id="size-guide" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Vintage sizing</div>
+      <h2 class="display sec-title">Size guide</h2>
+    </div>
+    <table class="size-tbl">
+      <tr><th>Label</th><th>Fits like (modern)</th><th>Chest (in)</th><th>Length (in)</th></tr>
+      <tr><td><b>S</b> / 36-38</td><td>S–M (boxy fit)</td><td>18–20</td><td>26–27</td></tr>
+      <tr><td><b>M</b> / 40</td><td>M–L</td><td>20–22</td><td>27–28</td></tr>
+      <tr><td><b>L</b> / 42-44</td><td>L (relaxed)</td><td>22–24</td><td>28–29</td></tr>
+      <tr><td><b>XL</b> / 46+</td><td>XL (oversized)</td><td>24–26</td><td>29–30</td></tr>
+    </table>
+    <p class="footnote">Vintage sizing runs smaller and boxier than modern sizing. Just ask on WhatsApp and we'll measure any piece for you before you commit.</p>
+  </div>
+</section>
+
+<!-- ================= INQUIRY ================= -->
+<section id="inquiry" class="dark" style="padding:88px 0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Inquiries</div>
+      <h2 class="display sec-title">See something you like?</h2>
+    </div>
+    <div class="inquiry-grid">
+      <div class="inquiry-info">
+        <h3>Direct lines</h3>
+        <p>The fastest way to get a piece is WhatsApp — tell us which item, your size, and when you can meet up or need delivery. We reply as fast as we can, and we hold pieces for confirmed inquiries.</p>
+        <div class="contact-col">
+          <a class="contact-row" href="https://wa.me/971508910243" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.26.49 1.7.63.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 9.89 9.9c0 5.44-4.44 9.87-9.9 9.87zM20.5 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.17-1.24-6.15-3.44-8.4z"/></svg>
+            WhatsApp: +971 50 891 0243
+          </a>
+          <a class="contact-row" href="https://www.facebook.com/tobii.lass" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
+            facebook.com/tobii.lass
+          </a>
+          <a class="contact-row" href="https://www.instagram.com/thrift.savvy" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @thrift.savvy
+          </a>
+          <a class="contact-row" href="mailto:merlandgonzaga30@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            merlandgonzaga30@gmail.com
+          </a>
+        </div>
+      </div>
+      <form class="inquiry-form" id="inquiryForm" novalidate>
+        <h3>Inquiry form</h3>
+        <div class="sub">Fill this in and we'll get back to you on WhatsApp with availability and price.</div>
+        <div class="field-row">
+          <div class="field" id="f-name">
+            <label for="inName">Your name</label>
+            <input id="inName" type="text" placeholder="e.g. Sara">
+            <div class="err">Please tell us your name.</div>
+          </div>
+          <div class="field" id="f-phone">
+            <label for="inPhone">WhatsApp number</label>
+            <input id="inPhone" type="tel" placeholder="e.g. 050 123 4567">
+            <div class="err">We need a number to reply to you.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="inItem">What are you looking for?</label>
+          <select id="inItem">
+            <option value="">— Select a piece —</option>
+            <option>Something specific I saw on the rack</option>
+            <option>Vintage tees</option>
+            <option>Jackets &amp; denim</option>
+            <option>Streetwear</option>
+            <option>Dresses</option>
+            <option>Footwear</option>
+            <option>Bags &amp; accessories</option>
+            <option>Looking for a specific brand / item (please describe below)</option>
+          </select>
+        </div>
+        <div class="field" id="f-msg">
+          <label for="inMsg">Your message</label>
+          <textarea id="inMsg" placeholder="Which piece caught your eye? What size are you? Meet-up or delivery?"></textarea>
+          <div class="err">A short message helps us help you.</div>
+        </div>
+        <button type="submit" class="form-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.26.49 1.7.63.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 9.89 9.9c0 5.44-4.44 9.87-9.9 9.87z"/></svg>
+          Send via WhatsApp
+        </button>
+        <p class="form-note">Your inquiry opens as a WhatsApp message — just hit send. We hold pieces for confirmed inquiries.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img class="foot-logo" src="https://base44.app/api/apps/6a562da51251e76c7e1f3827/files/mp/public/6a562da51251e76c7e1f3827/5f5820d4d_thrift-savvy-logo.png" alt="Thrift Savvy logo">
+        <p>Your one stop — budget friendly thrift finds. Vintage &amp; branded clothing, hand-picked and one of one. Dubai, UAE.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#shop">Browse the rack</a>
+        <a href="#why">Why Thrift Savvy</a>
+        <a href="#how">How it works</a>
+        <a href="#size-guide">Size guide</a>
+        <a href="#inquiry">Send an inquiry</a>
+      </div>
+      <div class="foot-col">
+        <h4>Get in touch</h4>
+        <a href="https://wa.me/971508910243" target="_blank" rel="noopener">WhatsApp: +971 50 891 0243</a>
+        <a href="https://www.facebook.com/tobii.lass" target="_blank" rel="noopener">facebook.com/tobii.lass</a>
+        <a href="https://www.instagram.com/thrift.savvy" target="_blank" rel="noopener">instagram.com/thrift.savvy</a>
+        <a href="mailto:merlandgonzaga30@gmail.com">merlandgonzaga30@gmail.com</a>
+        <p>Dubai, UAE — meet-up &amp; delivery</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Thrift Savvy. All pieces pre-loved with love.</div>
+      <div>Site by RED DEV</div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ============================================================
+   CONFIG — swap these for the client before handover
+   ============================================================ */
+const CONFIG = {
+  whatsapp: '971508910243',            // TODO: client's WhatsApp number
+  email: 'merlandgonzaga30@gmail.com',   // client's email
+  facebook: 'https://www.facebook.com/tobii.lass',
+  instagram: 'https://www.instagram.com/thrift.savvy',   // @thrift.savvy
+  currency: 'AED'
+};
+
+/* ---------- PRODUCTS ---------- */
+const PRODUCTS = [
+  {id:1, brand:"Levi's", name:'Vintage Denim Trucker Jacket', cat:'Jackets', size:'M', condition:'Very Good', price:149, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/c51bba5a9_generated_image.png'},
+  {id:2, brand:'Harley-Davidson', name:'90s Single-Stitch Graphic Tee', cat:'Tees', size:'L', condition:'Good', price:99, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/2a2f4ae0e_generated_image.png'},
+  {id:3, brand:'Nike', name:'Retro 90s Sneakers', cat:'Footwear', size:'42', condition:'Very Good', price:219, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/ad85f719d_generated_image.png'},
+  {id:4, brand:'Unbranded', name:'90s Striped Windbreaker', cat:'Jackets', size:'L', condition:'Excellent', price:129, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/b52b62222_generated_image.png'},
+  {id:5, brand:'Boho', name:'70s Floral Midi Dress', cat:'Dresses', size:'S', condition:'Excellent', price:119, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/1ad95c91b_generated_image.png'},
+  {id:6, brand:'Champion', name:'Reverse Weave Hoodie', cat:'Streetwear', size:'XL', condition:'Very Good', price:139, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/9d6b42925_generated_image.png'},
+  {id:7, brand:'Unbranded', name:'90s Baggy Cargo Pants', cat:'Streetwear', size:'32', condition:'Good', price:89, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/9083c652f_generated_image.png'},
+  {id:8, brand:'Band Tour', name:'Vintage Rock Tour Tee', cat:'Tees', size:'M', condition:'Good', price:79, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/c8ea5cf64_generated_image.png'},
+  {id:9, brand:'Luxury', name:'Pre-Loved Leather Handbag', cat:'Bags', size:'One size', condition:'Excellent', price:249, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/991079ee5_generated_image.png'},
+  {id:10, brand:'Vintage', name:'Two-Tone Patch Snapback Cap', cat:'Caps', size:'One size', condition:'Very Good', price:59, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/518473d61_generated_image.png'},
+  {id:11, brand:'Vintage', name:'Olive Corduroy Dad Cap', cat:'Caps', size:'One size', condition:'Excellent', price:49, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/14cc96465_generated_image.png'},
+  {id:12, brand:'Vintage', name:'Colorful Plaid Flannel Shirt', cat:'Shirts', size:'M', condition:'Very Good', price:69, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/40dd6e3a3_generated_image.png'},
+  {id:13, brand:'Vintage', name:'Navy Wool Star Cap', cat:'Caps', size:'One size', condition:'Very Good', price:59, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/dd0555728_generated_image.png'},
+  {id:14, brand:'Vintage', name:'Khaki Canvas Dad Cap', cat:'Caps', size:'One size', condition:'Excellent', price:49, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/5956543ae_generated_image.png'},
+  {id:15, brand:'Vintage', name:'Grey Heather Patch Snapback', cat:'Caps', size:'One size', condition:'Very Good', price:55, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/6aa5bd226_generated_image.png'},
+  {id:16, brand:'Vintage', name:'Retro Mesh Trucker Cap', cat:'Caps', size:'One size', condition:'Good', price:45, img:'https://media.base44.com/images/public/6a562da51251e76c7e1f3827/3dfce8af0_generated_image.png'}
+];
+
+/* ---------- STATE ---------- */
+let activeCat = 'all';
+let searchTerm = '';
+let sortMode = 'default';
+
+/* ---------- TICKER ---------- */
+(function buildTicker(){
+  const msgs = ['New finds every week','Every piece is 1/1','Budget friendly, always','Inquire on WhatsApp to reserve','From AED 49','Meet-up or delivery across UAE','Follow @thrift.savvy'];
+  const track = document.getElementById('tickerTrack');
+  track.innerHTML = msgs.concat(msgs).map(m => `<span>${m}</span>`).join('');
+})();
+
+/* ---------- PRODUCT RENDER ---------- */
+function getFiltered(){
+  let list = PRODUCTS.filter(p => {
+    const matchCat = activeCat === 'all' || p.cat === activeCat;
+    const s = searchTerm.toLowerCase();
+    const matchSearch = !s || p.name.toLowerCase().includes(s) || p.brand.toLowerCase().includes(s);
+    return matchCat && matchSearch;
+  });
+  if(sortMode === 'low') list = list.slice().sort((a,b) => a.price - b.price);
+  if(sortMode === 'high') list = list.slice().sort((a,b) => b.price - a.price);
+  return list;
+}
+
+function renderProducts(){
+  const grid = document.getElementById('productGrid');
+  const list = getFiltered();
+  if(list.length === 0){
+    grid.innerHTML = '<div class="empty-msg">Nothing on the rack for that one — try another search or category.</div>';
+    return;
+  }
+  grid.innerHTML = list.map(p => `
+    <article class="card" data-id="${p.id}">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="oo1">1/1</div>
+        <div class="cond">${p.condition}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">${p.brand}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-meta">Size ${p.size} · pre-loved</div>
+        <div class="card-foot">
+          <div class="price">${CONFIG.currency} ${p.price}<small> ask</small></div>
+          <button class="inquire-item-btn" onclick="inquireItem(${p.id})">Inquire</button>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+/* ---------- FILTERS ---------- */
+document.getElementById('catChips').addEventListener('click', e => {
+  const btn = e.target.closest('.chip');
+  if(!btn) return;
+  document.querySelectorAll('#catChips .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = btn.dataset.cat;
+  renderProducts();
+});
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  renderProducts();
+});
+document.getElementById('sortSelect').addEventListener('change', e => {
+  sortMode = e.target.value;
+  renderProducts();
+});
+
+/* ---------- ITEM INQUIRY ---------- */
+function inquireItem(id){
+  const p = PRODUCTS.find(x => x.id === id);
+  if(!p) return;
+  const msg =
+    'Hi Thrift Savvy! Is this piece still available?\n\n' +
+    `• ${p.name} (${p.brand}) — Size ${p.size} — ${CONFIG.currency} ${p.price}\n` +
+    'Can you hold it for me? Meet-up or delivery works.';
+  const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+  toast(`Opening WhatsApp — ask about the ${p.brand} piece`);
+}
+
+/* ---------- INQUIRY FORM ---------- */
+document.getElementById('inquiryForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const nameEl = document.getElementById('inName');
+  const phoneEl = document.getElementById('inPhone');
+  const msgEl = document.getElementById('inMsg');
+  const itemEl = document.getElementById('inItem');
+
+  const name = nameEl.value.trim();
+  const phone = phoneEl.value.trim();
+  const item = itemEl.value;
+  const message = msgEl.value.trim();
+
+  let ok = true;
+  document.getElementById('f-name').classList.toggle('invalid', !(name.length >= 2));
+  if(name.length < 2) ok = false;
+  document.getElementById('f-phone').classList.toggle('invalid', !(phone.length >= 7));
+  if(phone.length < 7) ok = false;
+  document.getElementById('f-msg').classList.toggle('invalid', !(message.length >= 5));
+  if(message.length < 5) ok = false;
+
+  if(!ok){ toast('Fill in your name, number and a short message.'); return; }
+
+  const msg =
+    'Hi Thrift Savvy! Inquiry from the website:\n\n' +
+    `Name: ${name}\n` +
+    `WhatsApp: ${phone}\n` +
+    `Looking for: ${item || '—'}\n` +
+    `Message: ${message}`;
+  const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+
+  // reset for next inquiry
+  nameEl.value = ''; phoneEl.value = ''; msgEl.value = ''; itemEl.value = '';
+  document.querySelectorAll('.field.invalid').forEach(f => f.classList.remove('invalid'));
+  toast('Opening WhatsApp — hit send and we\'ll reply!');
+});
+
+/* ---------- TOAST ---------- */
+function toast(text){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<span class="tick">✔</span>${text}`;
+  wrap.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('out');
+    setTimeout(() => el.remove(), 320);
+  }, 2600);
+}
+
+/* ---------- CONTENT PROTECTION ----------
+   Deterrent only — no client-side script can fully
+   stop a determined user. Blocks casual copying:
+   right-click, F12, Ctrl+Shift+I/J/C/K, Ctrl+U/S/P,
+   image drag and text selection.
+   ============================================================ */
+document.addEventListener('contextmenu', e => {
+  if(e.target.closest('input,textarea,select')) return;
+  e.preventDefault();
+  toast('Right-click is disabled 🔒');
+});
+document.addEventListener('dragstart', e => { if(e.target.tagName === 'IMG') e.preventDefault(); });
+document.addEventListener('keydown', e => {
+  const k = e.key.toUpperCase();
+  const blocked =
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && ['I','J','C','K'].includes(k)) ||
+    (e.metaKey && e.altKey && ['I','J','C'].includes(k)) ||
+    (e.ctrlKey && !e.shiftKey && ['U','S','P'].includes(k));
+  if(blocked){ e.preventDefault(); toast('This page is protected 🔒'); return false; }
+});
+
+/* ---------- INIT ---------- */
+renderProducts();
+</script>
+</body>
+</html>
